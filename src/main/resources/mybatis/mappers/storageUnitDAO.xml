@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baijia.warehouse.dao.StorageUnitDAO">
+	<resultMap type="com.baijia.warehouse.model.db.StorageUnitDO" id="BaseResultMap">
+		<result column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="channel" property="channel"/>
+		<result column="layer" property="layer"/>
+		<result column="slot" property="slot"/>
+		<result column="goods_code" property="goodsCode"/>
+		<result column="goods_num" property="goodsNum"/>
+		<result column="gmt_created" property="gmtCreated"/>
+		<result column="gmt_modified" property="gmtModified"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		id,
+		name,
+		channel,
+		layer,
+		slot,
+		goods_code,
+		goods_num,
+		gmt_created,
+		gmt_modified
+	</sql>
+	<insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		INSERT INTO storage_unit(
+			<include refid="Base_Column_List"></include>
+		)VALUES(
+			#{id},
+			#{name},
+			#{channel},
+			#{layer},
+			#{slot},
+			#{goodsCode},
+			#{goodsNum},
+			NOW(),
+			NOW()
+		)
+	</insert>
+</mapper>
