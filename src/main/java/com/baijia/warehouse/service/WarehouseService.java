@@ -1,5 +1,7 @@
 package com.baijia.warehouse.service;
 
+import java.util.List;
+
 import com.baijia.warehouse.model.dto.StorageUnitDTO;
 
 /**
@@ -9,5 +11,13 @@ import com.baijia.warehouse.model.dto.StorageUnitDTO;
 public interface WarehouseService {
 
 	int add(StorageUnitDTO goodsDTO);
+
+	List<StorageUnitDTO> getUnit();
+
+	List<StorageUnitDTO> getUnitByGoodsCode(String goodsCode);
+
+	int updateUnit(StorageUnitDTO storageUnitDTO);
+
+	int recycleUnit(Integer storageUnitId);
 
 }

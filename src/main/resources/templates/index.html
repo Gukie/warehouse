@@ -1,10 +1,44 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Title</title>
+    <title>welcome</title>
 </head>
 <body>
-<h1 th:text="${hello}">Hello</h1>
+<h1>Welcome 2 index page</h1>
+
+录入货位信息:
+<form  action="/add" method="post">
+	<label>通道:</label><input id="channel" name="channel" type="text"/>
+	<label>货层:</label><input id="layer" name="layer" type="text"/>
+	<label>货槽:</label><input id="slot" name="slot" type="text"/>
+	<input type="submit" value="submit"/>
+</form>
+
+<br/>
+将货物放入货位(获取一个列表，供选择)：
+<form  action="/addGoods2Unit" method="post">
+	<label>选择一个货位:</label>
+	<select id="getStorageUnit">
+		<option>请选择</option>
+	</select>
+	<label>货品条形码:</label><input id="goodsCode" name="goodsCode" type="text"/>
+	<label>货品数量:</label><input id="goodsNum" name="goodsNum" type="text"/>
+	<input type="submit" value="submit"/>
+</form>
+
+<br/>
+出货(选择一个货物类型，将在货位上放了最久的那个货物提取出来)：
+
+1. 搜索
+<label>货品条形码:</label><input id="goodsCode" name="goodsCode" type="text"/>
+2. 展示，多选并出库
+<form  action="/recycleUnit" method="post">
+	<select id="candidateStorageUnitList">
+		<option>请选择</option>
+	</select>
+	<input type="submit" value="submit"/>
+</form>
+
 </body>
 </html>

@@ -23,6 +23,24 @@
 		gmt_created,
 		gmt_modified
 	</sql>
+	<sql id="Query_Condition">
+		1=1
+			<if test="unitIdList!=null and unitIdList.size()>0">
+				AND id IN
+				<foreach collection="unitIdList" open="(" close=")" separator="," item="unitId">
+					#{unitId}
+				</foreach>
+			</if>
+			<if test="goodsCodeList!=null and goodsCodeList.size()>0">
+				AND goods_code IN
+				<foreach collection="goodsCodeList" open="(" close=")" separator="," item="goodsCode">
+					#{goodsCode}
+				</foreach>
+			</if>
+			<if test="hasGoodsStored!=null and hasGoodsStored == true">
+				AND goods_num IS NOT NULL AND goods_num>0
+			</if>
+	</sql>
 	<insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
 		INSERT INTO storage_unit(
 			<include refid="Base_Column_List"></include>
@@ -38,4 +56,48 @@
 			NOW()
 		)
 	</insert>
+	
+	<select id="getByList" resultMap="BaseResultMap">
+		SELECT
+			<include refid="Base_Column_List"></include>
+		FROM
+			storage_unit
+		WHERE
+			<include refid="Query_Condition"></include>
+		ORDER BY
+			gmt_modified
+		LIMIT 10
+	</select>
+	<update id="update">
+		UPDATE
+			storage_unit
+		SET
+			gmt_modified=NOW(),
+			name = #{name},
+			channel=#{channel},
+			layer=#{layer},
+			slot=#{slot},
+			goods_code=#{goodsCode},
+			goods_num=#{goodsNum}
+		WHERE
+			id=#{id}
+	</update>
+	<select id="getById" resultMap="BaseResultMap">
+		SELECT
+			<include refid="Base_Column_List"></include>
+		FROM
+			storage_unit
+		WHERE
+			id = #{unitId}
+	</select>
+	<update id="recycleById">
+		UPDATE
+			storage_unit
+		SET
+			goods_code='',
+			goods_num = 0,
+			gmt_modified=NOW()
+		WHERE
+			id = #{unitId}
+	</update>
 </mapper>
