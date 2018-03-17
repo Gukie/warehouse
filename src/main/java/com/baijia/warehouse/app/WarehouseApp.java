@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.baijia.warehouse.base.ResponseResult;
 import com.baijia.warehouse.model.dto.StorageUnitDTO;
 import com.baijia.warehouse.service.WarehouseService;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author gushu
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @SpringBootApplication(scanBasePackages = { "com.baijia.warehouse.service" })
 @ImportResource(locations = { "classpath:mybatis/mybatis-spring.xml", "classpath:mybatis/datasource.xml",
 		"classpath:spring-conf/spring-beans.xml" })
+// @RestController
 @Controller
 public class WarehouseApp {
 
@@ -38,6 +41,20 @@ public class WarehouseApp {
 		// return模板文件的名称，对应src/main/resources/templates/index.html
 		return "index";
 	}
+	@RequestMapping("/addUnit")
+	public String addUnit() {
+		return "unit_add";
+	}
+	
+	@RequestMapping("/goodsIn")
+	public String goodsIn() {
+		return "in_goods";
+	}
+	
+	@RequestMapping("/goodsOut")
+	public String goodsOut() {
+		return "out_goods";
+	}
 
 	// @RequestMapping("/add")
 	// public ResponseResult add(StorageUnitDTO goodsDTO) {
@@ -54,8 +71,21 @@ public class WarehouseApp {
 		storageUnitDTO.setLayer(layer);
 		storageUnitDTO.setSlot(slot);
 		warehouseService.add(storageUnitDTO);
-		return "index";
+		return "in_goods";
 	}
+
+	// /**
+	// * 获取没有存放货物的货位，返回前10条
+	// *
+	// * @param modelMap
+	// * @return
+	// */
+	// @RequestMapping("/getStorageUnit")
+	// public String getStorageUnit(ModelMap modelMap) {
+	// List<StorageUnitDTO> result = warehouseService.getUnit();
+	// modelMap.put("emptyUnitList", result);
+	// return "index";
+	// }
 
 	/**
 	 * 获取没有存放货物的货位，返回前10条
@@ -63,11 +93,11 @@ public class WarehouseApp {
 	 * @param modelMap
 	 * @return
 	 */
-	@RequestMapping("/getStorageUnit")
-	public String getStorageUnit(ModelMap modelMap) {
-		List<StorageUnitDTO> result = warehouseService.getUnit();
-		modelMap.put("unitList", result);
-		return "index";
+	@RequestMapping("/getAvailableUnit")
+	@ResponseBody
+	public ResponseResult getAvailableUnit() {
+		List<StorageUnitDTO> result = warehouseService.getAvailableUnit();
+		return ResponseResult.success(result);
 	}
 
 	/**
@@ -78,10 +108,11 @@ public class WarehouseApp {
 	 * @return
 	 */
 	@RequestMapping("/getStorageUnitByGoodsCode")
-	public String getStorageUnitByGoodsCode(@RequestParam("goodsCode") String goodsCode, ModelMap modelMap) {
+	@ResponseBody
+	public ResponseResult getStorageUnitByGoodsCode(@RequestParam("goodsCode") String goodsCode) {
+		System.err.println("received param:"+goodsCode);
 		List<StorageUnitDTO> result = warehouseService.getUnitByGoodsCode(goodsCode);
-		modelMap.put("unitList", result);
-		return "index";
+		return ResponseResult.success(result);
 	}
 
 	/**
@@ -93,16 +124,12 @@ public class WarehouseApp {
 	 * @return
 	 */
 	@RequestMapping("/addGoods2Unit")
-	public String addGoods2Unit(@RequestParam("storageUnitId") Integer storageUnitId,
-			@RequestParam("goodsCode") String goodsCode, @RequestParam("goodsNum") Integer goodsNum) {
-		StorageUnitDTO storageUnitDTO = new StorageUnitDTO();
-		storageUnitDTO.setId(storageUnitId);
-		storageUnitDTO.setGoodsCode(goodsCode);
-		storageUnitDTO.setGoodsNum(goodsNum);
-		warehouseService.updateUnit(storageUnitDTO);
-		return "index";
+	@ResponseBody
+	public ResponseResult addGoods2Unit(StorageUnitDTO storageUnitDTO) {
+		Integer updated = warehouseService.updateUnit(storageUnitDTO);
+		return ResponseResult.success(updated);
 	}
-	
+
 	/**
 	 * 将货物从货位上取出(出库操作)
 	 * 
@@ -110,9 +137,10 @@ public class WarehouseApp {
 	 * @return
 	 */
 	@RequestMapping("/recycleUnit")
-	public String recycleUnit(@RequestParam("storageUnitId") Integer storageUnitId) {
-		warehouseService.recycleUnit(storageUnitId);
-		return "index";
+	@ResponseBody
+	public ResponseResult recycleUnit(@RequestParam("storageUnitId") Integer storageUnitId) {
+		int recycled = warehouseService.recycleUnit(storageUnitId);
+		return ResponseResult.success(recycled);
 	}
 
 }

@@ -55,8 +55,9 @@ public class WarehouseServiceImpl implements WarehouseService {
 	}
 
 	@Override
-	public List<StorageUnitDTO> getUnit() {
+	public List<StorageUnitDTO> getAvailableUnit() {
 		StorageUnitQuery unitQuery = new StorageUnitQuery();
+		unitQuery.setHasGoodsStored(false);
 		List<StorageUnitDO> unitDOList = storageUnitDAO.getByList(unitQuery);
 		return convert2DTO(unitDOList);
 	}

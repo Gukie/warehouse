@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>将货物放入货位</title>
+<script type="text/javascript" src="javascript/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="javascript/goodsIn.js"></script>
+</head>
+<body>
+
+
+
+	<br /> 将货物放入货位(获取一个列表，供选择)：
+	<form>
+		<label>选择一个货位:</label> <select id="availableStorageUnitList">
+			<option>请选择</option>
+		</select> <label>货品条形码:</label> <input id="inGoodsCode" name="inGoodsCode"
+			type="text" /> <label>货品数量:</label> <input id="inGoodsNum"
+			name="inGoodsNum" type="text" /> <input type="submit" value="入库"
+			onclick="addGoods2Unit()" />
+	</form>
+
+
+</body>
+</html>

@@ -12,7 +12,7 @@ public interface WarehouseService {
 
 	int add(StorageUnitDTO goodsDTO);
 
-	List<StorageUnitDTO> getUnit();
+	List<StorageUnitDTO> getAvailableUnit();
 
 	List<StorageUnitDTO> getUnitByGoodsCode(String goodsCode);
 
