@@ -40,6 +40,9 @@
 			<if test="hasGoodsStored!=null and hasGoodsStored == true">
 				AND goods_num IS NOT NULL AND goods_num>0
 			</if>
+			<if test="hasGoodsStored!=null and hasGoodsStored == false">
+				AND goods_num IS NULL OR goods_num=0
+			</if>
 	</sql>
 	<insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
 		INSERT INTO storage_unit(

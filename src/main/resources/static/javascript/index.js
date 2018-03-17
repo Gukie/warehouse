@@ -33,6 +33,29 @@ function loadEmptyStorageUnitList() {
 	})
 }
 
+function addUnit(){
+	var unit = {};
+	unit.channel=$("#channel").val();
+	unit.layer=$('#layer').val();
+	unit.slot=$('#slot').val();
+	
+	$.ajax({
+		type : "POST",
+		url : "/addUnit",
+		dataType : 'json',
+		data:unit,
+		cache : false,
+		timeout : 600000,
+		success : function(result) {
+			console.log(result);
+			loadEmptyStorageUnitList();
+		},
+		error : function(err) {
+			console.log(err)
+		}
+	})
+}
+
 
 function addGoods2Unit() {
 	
@@ -42,7 +65,7 @@ function addGoods2Unit() {
 	storageUnit.goodsNum=$('#inGoodsNum').val();
 	$.ajax({
 		type : "POST",
-		contentType : "application/json",
+//		contentType : "application/json",
 		url : "/addGoods2Unit",
 		dataType : 'json',
 		data:storageUnit,
