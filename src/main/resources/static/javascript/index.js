@@ -1,7 +1,21 @@
 // 页面加载的时候，就做的事情
 $(function() {
 	loadEmptyStorageUnitList();
+	$('#search-form').submit(function (event){
+		//stop submit the form, we will post it manually. otherwise the whole page will be submitted and refreshed. 
+		event.preventDefault();
+		getUnitByGoodsCode();
+	});
+	$('#in-goods-form').submit(function(event){
+		event.preventDefault();
+		addGoods2Unit();
+	});
+	$('#unit-add-form').submit(function(event){
+		event.preventDefault();
+		addUnit();
+	});
 });
+
 
 /**
  * refer: https://www.mkyong.com/spring-boot/spring-boot-ajax-example/
@@ -10,7 +24,6 @@ $(function() {
  * @returns
  */
 function loadEmptyStorageUnitList() {
-//	alert('starting to loadEmptyStorageUnitList');;
 	$('#availableStorageUnitList').empty();
 	$('#availableStorageUnitList').append('<option>请选择</option>');
 	$.ajax({
@@ -42,8 +55,10 @@ function addUnit(){
 	$.ajax({
 		type : "POST",
 		url : "/addUnit",
+		contentType : "application/json",
 		dataType : 'json',
-		data:unit,
+//		data:unit,
+		data:JSON.stringify(unit),
 		cache : false,
 		timeout : 600000,
 		success : function(result) {
@@ -56,7 +71,6 @@ function addUnit(){
 	})
 }
 
-
 function addGoods2Unit() {
 	
 	var storageUnit = {};
@@ -65,19 +79,17 @@ function addGoods2Unit() {
 	storageUnit.goodsNum=$('#inGoodsNum').val();
 	$.ajax({
 		type : "POST",
-//		contentType : "application/json",
+		contentType : "application/json",
 		url : "/addGoods2Unit",
 		dataType : 'json',
-		data:storageUnit,
+		data:JSON.stringify(storageUnit),
 		cache : false,
 		timeout : 600000,
 		success : function(result) {
-//			alert('success - addGoods2Unit');
 			console.log(result);
-//			loadEmptyStorageUnitList();
+			loadEmptyStorageUnitList();
 		},
 		error : function(err) {
-//			alert('err - addGoods2Unit');
 			console.log(err)
 		}
 	})
@@ -92,10 +104,10 @@ function getUnitByGoodsCode(){
 		type : "POST",
 		url : "/getStorageUnitByGoodsCode",
 		dataType : 'json',
-//		contentType : "application/json",
+//		contentType : "application/text",
 		data:{'goodsCode':outGoodsCode},
-//		cache : false,
-//		timeout : 600000,
+		cache : false,
+		timeout : 600000,
 		success : function(result) {
 			console.log('success - getUnitByGoodsCode');
 //			alert('success - getUnitByGoodsCode');
@@ -111,28 +123,27 @@ function getUnitByGoodsCode(){
 	})
 }
 
-
 function updateOutCandidateUnitTable(data){
 	var tableBody = $('#outCandidateUnitTable').find('tbody');
 	tableBody.empty();
 	$.each(data, function(index, item) {
-//		var tr = $('<tr id='+item.id+'>');
-//		var indexCol = $('<td>'+index+'</td>');
-//		var goodsNameCol = $('<td>'+item.goodsCode+'</td>');
-//		var goodsNumCol = $('<td>'+item.goodsNum+'</td>');
-//		var unitLocationCol = $('<td>'+item.name+'</td>');
-//		var gmtCreatedCol = $('<td>'+item.gmtModified+'</td>');
-//		var recycleBtnCol = $('<td>');
-//		var recycleBtn = $('<input>').attr('type','submit').attr('onclick','recycleUnit(this)').val('出库');
-//		
-//		recycleBtnCol.append(recycleBtn);
-//		tr.append(indexCol);
-//		tr.append(goodsNameCol);
-//		tr.append(goodsNumCol);
-//		tr.append(unitLocationCol);
-//		tr.append(gmtCreatedCol);
-//		tr.append(recycleBtnCol);
-//		tableBody.append(tr);
+		var tr = $('<tr id='+item.id+'>');
+		var indexCol = $('<td>'+index+'</td>');
+		var goodsNameCol = $('<td>'+item.goodsCode+'</td>');
+		var goodsNumCol = $('<td>'+item.goodsNum+'</td>');
+		var unitLocationCol = $('<td>'+item.name+'</td>');
+		var gmtCreatedCol = $('<td>'+item.gmtModified+'</td>');
+		var recycleBtnCol = $('<td>');
+		var recycleBtn = $('<input>').attr('type','submit').attr('onclick','recycleUnit(this)').val('出库');
+		
+		recycleBtnCol.append(recycleBtn);
+		tr.append(indexCol);
+		tr.append(goodsNameCol);
+		tr.append(goodsNumCol);
+		tr.append(unitLocationCol);
+		tr.append(gmtCreatedCol);
+		tr.append(recycleBtnCol);
+		tableBody.append(tr);
 //		alert('finished append data to table');
 	});
 }

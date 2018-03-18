@@ -5,6 +5,8 @@
 <meta charset="UTF-8" />
 <title>welcome</title>
  <link href="warehouse.css" rel="stylesheet" type="text/css"/>
+<!-- <script type="text/javascript" src="javascript/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="javascript/index.js"></script> -->
 <script type="text/javascript" src="javascript/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="javascript/index.js"></script>
 </head>
@@ -19,45 +21,45 @@
 	
 	
 录入货位信息:
-	<form >
+	<form id="unit-add-form">
 		<label>通道:</label><input id="channel" name="channel" type="text" /> <label>货层:</label><input
 			id="layer" name="layer" type="text" /> <label>货槽:</label><input
 			id="slot" name="slot" type="text" /> 
-			<input type="submit" value="submit" onclick="addUnit()" />
+			<input type="submit" value="添加货位" />
 	</form>
 	
 	
 	<br /> 将货物放入货位(获取一个列表，供选择)：
-	<form>
+	<form id="in-goods-form">
 		<label>选择一个货位:</label> <select id="availableStorageUnitList">
 			<option>请选择</option>
 		</select> <label>货品条形码:</label> <input id="inGoodsCode" name="inGoodsCode"
 			type="text" /> <label>货品数量:</label> <input id="inGoodsNum"
-			name="inGoodsNum" type="text" /> <input type="submit" value="入库"
-			onclick="addGoods2Unit()" />
+			name="inGoodsNum" type="text" /> <input type="submit" value="入库"/>
 	</form>
 	
 	
 	<br /> 出货(选择一个货物类型，将在货位上放了最久的那个货物提取出来)：
-	<form>
-		<label>请输入要搜索的货物条形码:</label> <input id="outGoodsCodeSearch"
-			name="outGoodsCodeSearch" type="text" /> <input type="submit"
-			onclick="getUnitByGoodsCode()" />
+	<form id="search-form">
+		<label>请输入要搜索的货物条形码:</label> 
+		<input id="outGoodsCodeSearch" name="outGoodsCodeSearch" type="text" /> 
+			<button type="submit" id="bth-search">Search</button>
 	</form>
 	2. 展示，多选并出库
-	<table id="outCandidateUnitTable">
-		<thead>
-			<tr>
-				<th>序列号</th>
-				<th>货品条形码</th>
-				<th>货品数量</th>
-				<th>货位地址</th>
-				<th>上架时间</th>
-				<th>操作</th>
-			</tr>
-		</thead>
-		<tbody>
-		</tbody>
-	</table>
+	
+		<table id="outCandidateUnitTable">
+			<thead>
+				<tr>
+					<th>序列号</th>
+					<th>货品条形码</th>
+					<th>货品数量</th>
+					<th>货位地址</th>
+					<th>上架时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
 </body>
 </html>

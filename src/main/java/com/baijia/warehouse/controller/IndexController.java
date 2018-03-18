@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import com.baijia.warehouse.base.ResponseResult;
 import com.baijia.warehouse.model.dto.StorageUnitDTO;
 import com.baijia.warehouse.service.WarehouseService;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,8 +22,14 @@ public class IndexController {
 	private WarehouseService warehouseService;
 
 
+//	@RequestMapping("/addUnit")
+//	public ResponseResult addUnit(StorageUnitDTO storageUnitDTO) {
+//		int added = warehouseService.add(storageUnitDTO);
+//		return ResponseResult.success(added);
+//	}
+	
 	@RequestMapping("/addUnit")
-	public ResponseResult addUnit(StorageUnitDTO storageUnitDTO) {
+	public ResponseResult addUnit(@RequestBody StorageUnitDTO storageUnitDTO) {
 		int added = warehouseService.add(storageUnitDTO);
 		return ResponseResult.success(added);
 	}
@@ -53,7 +60,22 @@ public class IndexController {
 		List<StorageUnitDTO> result = warehouseService.getUnitByGoodsCode(goodsCode);
 		return ResponseResult.success(result);
 	}
+	
 
+//	/**
+//	 * 将货物放到货位上
+//	 * 
+//	 * @param storageUnitId
+//	 * @param goodsCode
+//	 * @param goodsNum
+//	 * @return
+//	 */
+//	@RequestMapping("/addGoods2Unit")
+//	public ResponseResult addGoods2Unit(StorageUnitDTO storageUnitDTO) {
+//		Integer updated = warehouseService.updateUnit(storageUnitDTO);
+//		return ResponseResult.success(updated);
+//	}
+	
 	/**
 	 * 将货物放到货位上
 	 * 
@@ -63,7 +85,7 @@ public class IndexController {
 	 * @return
 	 */
 	@RequestMapping("/addGoods2Unit")
-	public ResponseResult addGoods2Unit(StorageUnitDTO storageUnitDTO) {
+	public ResponseResult addGoods2Unit(@RequestBody StorageUnitDTO storageUnitDTO) {
 		Integer updated = warehouseService.updateUnit(storageUnitDTO);
 		return ResponseResult.success(updated);
 	}

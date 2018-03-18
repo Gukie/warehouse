@@ -1,5 +1,8 @@
 package com.baijia.warehouse.controller;
 
+import javax.annotation.Resource;
+
+import com.baijia.warehouse.service.WarehouseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 
 public class RouterController {
+	
+	@Resource(name = "warehouseService")
+	private WarehouseService warehouseService;
+	
 	@RequestMapping("/")
 	public String index(ModelMap modelMap) {
 		// 向模板中添加属性
