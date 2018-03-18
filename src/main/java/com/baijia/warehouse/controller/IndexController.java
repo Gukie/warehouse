@@ -21,13 +21,6 @@ public class IndexController {
 	@Resource(name = "warehouseService")
 	private WarehouseService warehouseService;
 
-
-//	@RequestMapping("/addUnit")
-//	public ResponseResult addUnit(StorageUnitDTO storageUnitDTO) {
-//		int added = warehouseService.add(storageUnitDTO);
-//		return ResponseResult.success(added);
-//	}
-	
 	@RequestMapping("/addUnit")
 	public ResponseResult addUnit(@RequestBody StorageUnitDTO storageUnitDTO) {
 		int added = warehouseService.add(storageUnitDTO);

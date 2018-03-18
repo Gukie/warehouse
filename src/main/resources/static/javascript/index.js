@@ -149,11 +149,11 @@ function updateOutCandidateUnitTable(data){
 }
 
 function recycleUnit(obj){
-	var unitId = $(obj).parents('tr').id();
+	var unitId = $(obj).parents('tr').attr('id');
 	
 	$.ajax({
 		type : "POST",
-		contentType : "application/json",
+//		contentType : "application/json",
 		url : "/recycleUnit",
 		dataType : 'json',
 		data:{'storageUnitId':unitId},
@@ -161,6 +161,7 @@ function recycleUnit(obj){
 		timeout : 600000,
 		success : function(result) {
 			console.log(result);
+			$(obj).parents('tr').remove();
 		},
 		error : function(err) {
 			console.log('err - recycleUnit');
