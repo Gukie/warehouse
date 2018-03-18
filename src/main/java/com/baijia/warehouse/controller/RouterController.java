@@ -23,6 +23,21 @@ public class RouterController {
 		// 向模板中添加属性
 		modelMap.put("hello", "lokia");
 		// return模板文件的名称，对应src/main/resources/templates/index.html
-		return "index";
+		return "add-unit";
+	}
+	
+	@RequestMapping("/addunit")
+	public String addUnit() {
+		return "add-unit";
+	}
+	
+	@RequestMapping("/ingoods")
+	public String ingoods() {
+		return "in-goods";
+	}
+	
+	@RequestMapping("/outgoods")
+	public String outgoods() {
+		return "out-goods";
 	}
 }

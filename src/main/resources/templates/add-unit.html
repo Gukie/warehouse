@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>welcome</title>
+<link href="css/warehouse.css" rel="stylesheet" type="text/css" />
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div class="page-header">
+		<h1>欢迎来到<small>老李头货位管理</small>小系统</h1>
+	</div>
+
+	<ul class="nav nav-pills">
+		<li role="presentation" class="active"><a href="#">录入货位</a></li>
+		<li role="presentation"><a href="ingoods">入库</a></li>
+		<li role="presentation"><a href="outgoods">出货</a></li>
+	</ul>
+	<div id="unit-add-div"  class="panel panel-info" align="center">
+		<div class="panel-heading">录入货位信息</div>
+		<form id="unit-add-form">
+			<div class="input-group">
+				<label for="channel">通道:</label>
+				<input id="channel" name="channel" type="text"/>
+			</div>
+			<div class="input-group">
+				<label for="layer">货层:</label>
+				<input id="layer" name="layer" type="text" />
+			</div>
+			<div class="input-group">
+				 <label for="layer">货槽:</label>
+				 <input	id="slot" name="slot" type="text"  /> 
+			</div>
+			<input type="submit" value="添加货位" class="btn btn-primary"/>
+		</form>
+	</div>
+
+	<script type="text/javascript" src="javascript/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="javascript/warehouse.js"></script>
+</body>
+</html>

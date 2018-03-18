@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>welcome</title>
+<link href="css/warehouse.css" rel="stylesheet" type="text/css" />
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="css/bootstrap-theme.min.css" rel="stylesheet"
+	type="text/css" />
+</head>
+<body>
+	<div class="page-header">
+		<h1>
+			欢迎来到<small>老李头货位管理</small>小系统
+		</h1>
+	</div>
+	<ul class="nav nav-pills">
+		<li role="presentation"><a href="addunit">录入货位</a></li>
+		<li role="presentation"><a href="ingoods">入库</a></li>
+		<li role="presentation" class="active"><a href="#">出货</a></li>
+	</ul>
+
+	<div id="out-goods-div" class="panel panel-info" align="center">
+		<div class="panel-heading">出货(选择一个货物类型，将在货位上放了最久的那个货物提取出来)</div>
+		<div class="panel-body">
+			<div class="col-lg-6">
+				<form id="search-form">
+					<div class="input-group">
+						<input id="outGoodsCodeSearch" name="outGoodsCodeSearch"
+							type="text" class="form-control" placeholder="请输入要搜索的货物条形码.."
+							aria-describedby="sizing-addon3"></input> <span
+							class="input-group-btn">
+							<button class="btn btn-default" type="submit" id="bth-search">搜索!</button>
+						</span>
+					</div>
+				</form>
+			</div>
+		</div>
+		<table id="outCandidateUnitTable" class="table">
+			<thead>
+				<tr>
+					<th scope="col">序列号</th>
+					<th scope="col">货品条形码</th>
+					<th scope="col">货品数量</th>
+					<th scope="col">货位地址</th>
+					<th scope="col">上架时间</th>
+					<th scope="col">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+
+	<script type="text/javascript" src="javascript/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="javascript/warehouse.js"></script>
+</body>
+</html>

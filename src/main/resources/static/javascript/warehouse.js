@@ -132,7 +132,7 @@ function updateOutCandidateUnitTable(data){
 	tableBody.empty();
 	$.each(data, function(index, item) {
 		var tr = $('<tr id='+item.id+'>');
-		var indexCol = $('<td>'+(index+1)+'</td>');
+		var indexCol = $('<th scope="row">'+(index+1)+'</th>');
 		var goodsNameCol = $('<td>'+item.goodsCode+'</td>');
 		var goodsNumCol = $('<td>'+item.goodsNum+'</td>');
 		var unitLocationCol = $('<td>'+item.name+'</td>');
