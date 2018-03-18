@@ -1,7 +1,5 @@
 package com.baijia.warehouse.model.dto;
 
-import java.util.Date;
-
 /**
  * 货位. 最小存储单元
  * "channel-layer-slot"可以唯一标示一个货位
@@ -19,22 +17,23 @@ public class StorageUnitDTO {
 	private String goodsCode; // 货物条码
 	private Integer goodsNum; // 货物数量
 	
-	private Date gmtCreated;
-	private Date gmtModified;
+	private String gmtCreated;
+	private String gmtModified;
+	
 
-	public Date getGmtCreated() {
+	public String getGmtCreated() {
 		return gmtCreated;
 	}
 
-	public void setGmtCreated(Date gmtCreated) {
+	public void setGmtCreated(String gmtCreated) {
 		this.gmtCreated = gmtCreated;
 	}
 
-	public Date getGmtModified() {
+	public String getGmtModified() {
 		return gmtModified;
 	}
 
-	public void setGmtModified(Date gmtModified) {
+	public void setGmtModified(String gmtModified) {
 		this.gmtModified = gmtModified;
 	}
 

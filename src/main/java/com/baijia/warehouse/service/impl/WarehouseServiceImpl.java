@@ -2,6 +2,7 @@ package com.baijia.warehouse.service.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import com.baijia.warehouse.dao.StorageUnitDAO;
@@ -9,6 +10,7 @@ import com.baijia.warehouse.model.db.StorageUnitDO;
 import com.baijia.warehouse.model.dto.StorageUnitDTO;
 import com.baijia.warehouse.model.query.StorageUnitQuery;
 import com.baijia.warehouse.service.WarehouseService;
+import com.baijia.warehouse.utils.DateFormatter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,9 +72,20 @@ public class WarehouseServiceImpl implements WarehouseService {
 		for (StorageUnitDO item : unitDOList) {
 			StorageUnitDTO dtoItem = new StorageUnitDTO();
 			BeanUtils.copyProperties(item, dtoItem);
+			formatDtoDateField(dtoItem,item);
 			result.add(dtoItem);
 		}
 		return result;
+	}
+
+	private void formatDtoDateField(StorageUnitDTO target,StorageUnitDO source) {
+		if(target == null || source ==null){
+			return;
+		}
+		Date created = source.getGmtCreated();
+		Date modified = source.getGmtModified();
+		target.setGmtCreated(DateFormatter.getFormattedDateStr(created));
+		target.setGmtModified(DateFormatter.getFormattedDateStr(modified));
 	}
 
 	@Override

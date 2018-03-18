@@ -1,0 +1,17 @@
+CREATE TABLE `storage_unit` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(128) NULL DEFAULT NULL COMMENT '货位名字',
+	`channel` VARCHAR(64) NULL DEFAULT NULL COMMENT '通道',
+	`layer` VARCHAR(64) NULL DEFAULT NULL COMMENT '货层',
+	`slot` VARCHAR(64) NULL DEFAULT NULL COMMENT '货槽',
+	`goods_code` VARCHAR(256) NULL DEFAULT NULL COMMENT '货物条形码',
+	`goods_num` INT(11) NULL DEFAULT NULL COMMENT '货物数量',
+	`gmt_created` DATETIME NULL DEFAULT NULL,
+	`gmt_modified` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+)
+COMMENT='货位(最小存储单元). 具体位置以\'channel-layer-slot\'可以定位到'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=11
+;

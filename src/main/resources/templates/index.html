@@ -4,22 +4,14 @@
 <head>
 <meta charset="UTF-8" />
 <title>welcome</title>
- <link href="warehouse.css" rel="stylesheet" type="text/css"/>
-<!-- <script type="text/javascript" src="javascript/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="javascript/index.js"></script> -->
-<script type="text/javascript" src="javascript/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="javascript/index.js"></script>
+ <link href="css/warehouse.css" rel="stylesheet" type="text/css"/>
+ <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+ <link href="css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
-	<h1>Welcome 2 index page</h1>
-	<!-- <ul>
-	  <li><a href="addUnit">录入货位信息</a></li>
-	  <li><a href="goodsIn">将货物放入货位</a></li>
-	  <li><a href="goodsOut">出货</a></li>
-	</ul> -->
-	
-	
+	<h1>欢迎来到老李头货位管理小系统</h1>
+<div id="unit-add-div">
 录入货位信息:
 	<form id="unit-add-form">
 		<label>通道:</label><input id="channel" name="channel" type="text" /> <label>货层:</label><input
@@ -28,17 +20,21 @@
 			<input type="submit" value="添加货位" />
 	</form>
 	
+	</div>	
 	
-	<br /> 将货物放入货位(获取一个列表，供选择)：
-	<form id="in-goods-form">
-		<label>选择一个货位:</label> <select id="availableStorageUnitList">
-			<option>请选择</option>
-		</select> <label>货品条形码:</label> <input id="inGoodsCode" name="inGoodsCode"
-			type="text" /> <label>货品数量:</label> <input id="inGoodsNum"
-			name="inGoodsNum" type="text" /> <input type="submit" value="入库"/>
-	</form>
+	<div id="in-goods-div">
+		<br /> 将货物放入货位(获取一个列表，供选择)：
+		<form id="in-goods-form">
+			<label>选择一个货位:</label> <select id="availableStorageUnitList">
+				<option>请选择</option>
+			</select> <label>货品条形码:</label> <input id="inGoodsCode" name="inGoodsCode"
+				type="text" /> <label>货品数量:</label> <input id="inGoodsNum"
+				name="inGoodsNum" type="text" /> <input type="submit" value="入库"/>
+		</form>
 	
+	</div>
 	
+	<div id="out-goods-div">
 	<br /> 出货(选择一个货物类型，将在货位上放了最久的那个货物提取出来)：
 	<form id="search-form">
 		<label>请输入要搜索的货物条形码:</label> 
@@ -61,5 +57,9 @@
 			<tbody>
 			</tbody>
 		</table>
+		</div>
+		
+	<script type="text/javascript" src="javascript/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="javascript/index.js"></script>
 </body>
 </html>

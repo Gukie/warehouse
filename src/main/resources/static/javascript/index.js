@@ -1,4 +1,8 @@
-// 页面加载的时候，就做的事情
+/**
+ * 页面加载的时候，就做的事情
+ * 1. 将可用的货位的数据获取到
+ * 2. 将表单中的默认submit行为都禁用，否则会刷新整个页面，达不到ajax的局部刷新效果
+ */
 $(function() {
 	loadEmptyStorageUnitList();
 	$('#search-form').submit(function (event){
@@ -128,7 +132,7 @@ function updateOutCandidateUnitTable(data){
 	tableBody.empty();
 	$.each(data, function(index, item) {
 		var tr = $('<tr id='+item.id+'>');
-		var indexCol = $('<td>'+index+'</td>');
+		var indexCol = $('<td>'+(index+1)+'</td>');
 		var goodsNameCol = $('<td>'+item.goodsCode+'</td>');
 		var goodsNumCol = $('<td>'+item.goodsNum+'</td>');
 		var unitLocationCol = $('<td>'+item.name+'</td>');

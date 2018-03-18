@@ -25,18 +25,4 @@ public class RouterController {
 		// return模板文件的名称，对应src/main/resources/templates/index.html
 		return "index";
 	}
-	@RequestMapping("/2addUnit")
-	public String addUnit() {
-		return "unit_add";
-	}
-	
-	@RequestMapping("/2goodsIn")
-	public String goodsIn() {
-		return "in_goods";
-	}
-	
-	@RequestMapping("/2goodsOut")
-	public String goodsOut() {
-		return "out_goods";
-	}
 }
