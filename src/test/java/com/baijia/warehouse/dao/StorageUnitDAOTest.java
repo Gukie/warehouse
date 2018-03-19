@@ -38,7 +38,7 @@ public class StorageUnitDAOTest extends BaseDAOTest {
 		unitQuery.setHasGoodsStored(false);
 		List<StorageUnitDO> result = unitDAO.getByList(unitQuery);
 		Assert.assertNotNull(result);
-		Assert.assertEquals(5, result.size());
+		Assert.assertEquals(15, result.size());
 	}
 	
 	@Test
