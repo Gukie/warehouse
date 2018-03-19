@@ -87,5 +87,6 @@ function addUnit(){
 refer: https://stackoverflow.com/questions/14322984/differences-between-contenttype-and-datatype-in-jquery-ajax-function
 contentType :
 > client 传给 server的数据的MIME类型，告诉server端client是使用该类型组装数据的，建议server也这样接受数据
+
 dataType:
 >client 期望server端返回的数据的MIME类型，告诉server端client期望得到这样的数据，方便client进行数据的解析
