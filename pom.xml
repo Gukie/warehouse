@@ -8,6 +8,7 @@
 
 	<name>warehouse-manage</name>
 	<url>http://maven.apache.org</url>
+	<!-- <packaging>war</packaging> -->
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,6 +22,7 @@
 		<mysql.connector>5.1.38</mysql.connector>
 		<fast.json.version>1.2.38</fast.json.version>
 		<lombok.version>1.16.18</lombok.version>
+		<servlet.version>2.3</servlet.version>
 	</properties>
 
 	<build>
@@ -59,97 +61,100 @@
 					<inputEncoding>UTF-8</inputEncoding>
 				</configuration>
 			</plugin>
-			 <plugin>  
-            <groupId>org.apache.maven.plugins</groupId>  
-            <artifactId>maven-shade-plugin</artifactId>  
-            <version>2.4.1</version>  
-            <executions>  
-                <execution>  
-                    <phase>package</phase>  
-                    <goals>  
-                        <goal>shade</goal>  
-                    </goals>  
-                    <configuration>  
-                        <transformers>  
-                            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">  
-                                <mainClass>com.baijia.warehouse.app.WarehouseApp</mainClass>  
-                            </transformer>  
-                            <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">  
-                                <resource>META-INF/spring.handlers</resource>  
-                            </transformer>  
-                            <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">  
-                                <resource>META-INF/spring.schemas</resource>  
-                            </transformer>  
-                        </transformers>  
-                    </configuration>  
-                </execution>  
-            </executions>  
-        </plugin> 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.4.1</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<transformers>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<mainClass>com.baijia.warehouse.app.WarehouseApp</mainClass>
+								</transformer>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+									<resource>META-INF/spring.handlers</resource>
+								</transformer>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+									<resource>META-INF/spring.schemas</resource>
+								</transformer>
+							</transformers>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 	<dependencies>
 
 
-			<!-- Spring boot -->
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-web</artifactId>
-				<version>${spring.boot.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-thymeleaf</artifactId>
-				<version>${spring.boot.version}</version>
-			</dependency>
+		<!-- Spring boot -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>${spring.boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+			<version>${spring.boot.version}</version>
+		</dependency>
 
-			<!-- Spring -->
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-web</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-core</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 
 
-			<!-- other jars -->
-			<dependency>
-				<groupId>com.fasterxml.jackson.core</groupId>
-				<artifactId>jackson-databind</artifactId>
-				<version>${jackson.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>${junit.version}</version>
-				<scope>test</scope>
-			</dependency>
+		<!-- other jars -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
 
-			<dependency>
-				<groupId>org.mybatis.spring.boot</groupId>
-				<artifactId>mybatis-spring-boot-starter</artifactId>
-				<version>${mybatis.spring.boot.starter}</version>
-			</dependency>
-			<dependency>
-				<groupId>mysql</groupId>
-				<artifactId>mysql-connector-java</artifactId>
-				<version>${mysql.connector}</version>
-			</dependency>
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>${mybatis.spring.boot.starter}</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.connector}</version>
+		</dependency>
 
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-test</artifactId>
-				<version>${spring.boot.version}</version>
-			</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<version>${spring.boot.version}</version>
+		</dependency>
 
-			<dependency>
-				<groupId>com.alibaba</groupId>
-				<artifactId>fastjson</artifactId>
-				<version>${fast.json.version}</version>
-			</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fast.json.version}</version>
+		</dependency>
 
 		<!-- new added -->
 		<dependency>
@@ -159,11 +164,14 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-			<version>${spring.boot.version}</version>
-		</dependency> -->
+		<!-- servlet, for testing servlet filter -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>${servlet.version}</version>
+			<!-- <scope>provided</scope> -->
+		</dependency>
+
 
 	</dependencies>
 </project>
